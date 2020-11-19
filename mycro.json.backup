@@ -1,0 +1,53 @@
+{
+    "server-socket": {
+        "bind": {
+            "host": "localhost",
+            "port": 7000
+        }
+    },
+    "server-mechanics": {
+        "preload_app": true,
+        "daemon": false,
+        "user": "root"
+    },
+    "debugging": {
+        "reload": true,
+        "reload_extra_files": []
+    },
+    "logging": {
+        "accesslog": "C:\\Users\\iamr0\\Documents\\proyectos\\Mycro/tavito",
+        "errorlog": null,
+        "loglevel": "info",
+        "capture_output": false,
+        "logger_class": "gunicorn.glogging.Logger",
+        "syslog": true,
+        "access_log_format": "%(h)s %(l)s %(u)s %(t)s \"%(r)s\" %(s)s %(b)s \"%(f)s\" \"%(a)s\""
+    },
+    "worker-processes": {
+        "max_requests": 1000,
+        "worker_class": "eventlet",
+        "workers": 4
+    },
+    "security": {
+        "limit_request_line": 4094,
+        "limit_request_fields": 100
+    },
+    "daemon": {
+        "name": "tavito",
+        "unit": {
+            "Description": "Service web server"
+        },
+        "install": {
+            "WantedBy": "multi-user.target"
+        },
+        "service": {
+            "User": null,
+            "PermissionsStartOnly": true,
+            "WorkingDirectory": "C:\\Users\\iamr0\\Documents\\proyectos\\Mycro",
+            "ExecStart": "gunicorn -w 4 main:app",
+            "TimeoutSec": 600,
+            "Restart": "on-failure",
+            "RuntimeDirectoryMode": 755
+        }
+    }
+}
