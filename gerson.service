@@ -1,0 +1,12 @@
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=None
+PermissionsStartOnly=True
+WorkingDirectory=None
+ExecStart=gunicorn -w 4 main:app
+TimeoutSec=600
+Restart=on-failure
+RuntimeDirectoryMode=755
+

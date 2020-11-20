@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask.logging import default_handler
-import gunicorn 
+import gunicorn  
 import psycopg2
 import configparser
 from flask_jwt_extended import (
@@ -15,7 +15,7 @@ from flask_jwt_extended import (
 import os
 from logging.config import dictConfig
 
-class bcolors:
+class bcolors: 
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
@@ -59,7 +59,7 @@ app.debug = app_debug
 app.config['SECRET_KEY'] = configurate.get('APP_KEY')
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://'+configurate.get('DB_USERNAME')+':'+configurate.get('DB_PASSWORD')+'@'+configurate.get('DB_HOST')+'/'+configurate.get('DB_DATABASE')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://'+configurate.get('DB_USERNAME')+':'+configurate.get('DB_PASSWORD')+'@'+configurate.get('DB_HOST')+'/'+configurate.get('DB_DATABASE') 
  
 db = SQLAlchemy(app)
 db.init_app(app)
