@@ -8,11 +8,11 @@ import json
 import subprocess
 
 folder_path = os.getcwd()
-path_service_logfile = f'{folder_path}/.mycro'
+path_service_logfile = '{}/.mycro'.format(folder_path)
 
 def mycrojson():
-    if path.isfile(f'{folder_path}/mycro.json'):
-        with open(f'{folder_path}/mycro.json') as json_file:
+    if path.isfile('{}/mycro.json'.format(folder_path)):
+        with open('{}/mycro.json'.format(folder_path)) as json_file:
             data = json.load(json_file)
             return(data)
     else:
@@ -21,7 +21,7 @@ def mycrojson():
         return None
     
 def updateMycroJson(obj):
-    with open(f'{folder_path}/mycro.json', "w") as jsonFile:
+    with open('{}/mycro.json'.format(folder_path), "w") as jsonFile:
         json.dump(obj, jsonFile,indent=4)
 
 
@@ -40,25 +40,25 @@ class Switcher(object):
     def unit(self):
         file = open("/etc/systemd/system/{}.service".format(self._name.replace(' ','_')), "a")
         file.write("[Unit]\n")
-        [file.write(f"{key}={value}\n") for key, value in self._value.items()]
+        [file.write("{key}={value}\n".format(key,value)) for key, value in self._value.items()]
         
         file.write("\n")
         file.close()
         return True
  
     def install(self):
-        file = open(f"{self._name.replace(' ','_')}.service", "a")
+        file = open("/etc/systemd/system/{}.service".format(self._name.replace(' ','_')), "a")
         file.write("[Install]\n")
-        [file.write(f"{key}={value}\n") for key, value in self._value.items()]
+        [file.write("{key}={value}\n".format(key,value)) for key, value in self._value.items()]
 
         file.write("\n")
         file.close()
         return True
  
     def service(self):
-        file = open(f"{self._name.replace(' ','_')}.service", "a")
+        file = open("/etc/systemd/system/{}.service".format(self._name.replace(' ','_')), "a")
         file.write("[Service]\n")
-        [file.write(f"{key}={value}\n") for key, value in self._value.items()]
+        [file.write("{key}={value}\n".format(key,value)) for key, value in self._value.items()]
 
         file.write("\n")
         file.close()
@@ -72,7 +72,7 @@ def makeDaemon(name):
             switcher = Switcher()
             mycro_json = mycrojson()
             mycro_json['daemon']['name'] = name.replace(' ','_')
-            file = open(f"{name.replace(' ','_')}.service", "w")
+            file = open("{}.service".format(name.replace(' ','_')), "w")
             file.write("")
             file.close()
             for key, value in mycro_json['daemon'].items():

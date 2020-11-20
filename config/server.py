@@ -9,17 +9,6 @@ import logging
 folder_path = os.getcwd()
 mycro = Mycro('gunicorn')
 
-if path.isfile(f'{folder_path}/mycro.json'):
-    with open(f'{folder_path}/mycro.json') as json_file:
-        data = json.load(json_file)
-        try:
-            mycro = data['gunicorn']
-        except Exception as err:
-            app.logger.info(bcolors.FAIL+'Key "gunicorn" does not exist, error: '+str(err)+bcolors.ENDC)
-else:
-    app.logger.info(bcolors.FAIL+'mycro.json file does not exist'+bcolors.ENDC)
-    sys.exit()
-
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -80,7 +69,7 @@ def pre_request(worker, req):
     worker.log.debug("%s %s" % (req.method, req.path))
 
 def worker_exit(server, worker):
-    logging.info(bcolors.WARNING+f'Worker exiting {worker}'+bcolors.ENDC)
+    logging.info('{} Worker exiting {} {}'.format(bcolors.WARNING,worker,bcolors.ENDC))
 
 def on_exit(server):
-    logging.info(bcolors.WARNING+f'Process finished successfully'+bcolors.ENDC)
+    logging.info('{} Process finished successfully {}'.format(bcolors.WARNING,bcolors.ENDC))

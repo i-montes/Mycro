@@ -1,6 +1,6 @@
 {
     "gunicorn": {
-        "host": "127.0.0.1",
+        "host": "0.0.0.0",
         "port": 5000,
         "max_workers": 4,
         "preload_app": true,
@@ -11,18 +11,18 @@
         "accesslog": "./.mycro/logs/accesslog.log",
         "errorlog": "./.mycro/logs/errorlog.log",
         "loglevel": "debug",
-        "capture_output": true,
+        "capture_output": false,
         "logger_class": "gunicorn.glogging.Logger",
         "syslog": true,
         "access_log_format": "%(h)s %(l)s %(u)s %(t)s \"%(r)s\" %(s)s %(b)s \"%(f)s\" \"%(a)s\"",
         "max_requests": 1000,
-        "worker_class": "eventlet",
+        "worker_class": "gthread",
         "workers": 4,
         "limit_request_line": 4094,
         "limit_request_fields": 100
     },
     "daemon": {
-        "name": "gerson",
+        "name": null,
         "unit": {
             "Description": "Service web server"
         },
